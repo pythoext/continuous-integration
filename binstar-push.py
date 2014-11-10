@@ -4,7 +4,8 @@ import subprocess
 import traceback
 
 token = os.environ['BINSTAR_TOKEN']
-cmd = ['binstar', '-t', token, 'upload', '--force']
+channel = os.environ.get('BINSTAR_CHANNEL', 'main')
+cmd = ['binstar', '-t', token, 'upload', '--force', '--channel %s' % channel]
 cmd.extend(glob.glob('*.tar.bz2'))
 try:
     subprocess.check_call(cmd)
