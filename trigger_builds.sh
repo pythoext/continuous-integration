@@ -6,7 +6,7 @@ git init
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
 git remote add origin https://github.com/prometeia/$1.git
-git pull
+git pull origin master
 git checkout master
 touch build_trigger_number
 touch build_trigger_branch

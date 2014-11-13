@@ -1,5 +1,6 @@
 
 import os
+import sys
 
 try:
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -7,4 +8,7 @@ try:
 except IOError:
     BRANCH_TO_BUILD = "master"
 
-print "export BRANCH_TO_BUILD=\"%s\"" % BRANCH_TO_BUILD
+if 'win' in sys.platform:
+    print "SET BRANCH_TO_BUILD=%s" % BRANCH_TO_BUILD
+else:
+    print "export BRANCH_TO_BUILD=\"%s\"" % BRANCH_TO_BUILD
