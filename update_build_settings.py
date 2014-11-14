@@ -2,12 +2,6 @@
 import os
 import sys
 
-branch_to_channel = {
-    'develop': 'dev',
-    'ratingpro': 'ratingpro2',
-    'tg_dj_oo': 'new-ui'
-}
-
 try:
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     BRANCH_TO_BUILD = open(os.path.join(BASE_DIR, 'build_trigger_branch'), 'r').read().strip()
@@ -19,8 +13,4 @@ if 'win' in sys.platform:
 else:
     cmd = "export"
 
-out = "%s BRANCH_TO_BUILD=%s" % (cmd, BRANCH_TO_BUILD)
-if BRANCH_TO_BUILD in branch_to_channel:
-    out += " && %s SET BINSTAR_CHANNEL=%s" % (cmd, branch_to_channel[BRANCH_TO_BUILD])
-
-print out
+print "%s BRANCH_TO_BUILD=%s" % (cmd, BRANCH_TO_BUILD)
