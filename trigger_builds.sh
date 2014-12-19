@@ -13,7 +13,7 @@ touch build_trigger_branch
 echo $TRAVIS_BRANCH > build_trigger_branch
 echo $TRAVIS_BUILD_NUMBER > build_trigger_number
 git add --all .
-git commit -m "Automated push to trigger a new build"
+git commit -m "Automated push to trigger a new build. Branch ${TRAVIS_BRANCH} -- Commit ${TRAVIS_COMMIT} "
 git push origin master
 echo "OK!"
 cd ..
