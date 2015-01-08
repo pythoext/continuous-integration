@@ -15,9 +15,9 @@ else:
 
 output = "%s BRANCH_TO_BUILD=%s" % (cmd, BRANCH_TO_BUILD)
 
-if BRANCH_TO_BUILD in BRANCH_TO_CHANNEL:
+if 'master' not in BRANCH_TO_BUILD:
     # add channel if needed
     output += " && conda config --add channels http://conda.binstar.org/t/%s/prometeia/channel/%s" % (
-    os.environ.get("BINSTAR_TOKEN"), BRANCH_TO_CHANNEL[BRANCH_TO_BUILD])
+    os.environ.get("BINSTAR_TOKEN"), BRANCH_TO_CHANNEL.get(BRANCH_TO_BUILD, BRANCH_TO_BUILD)
 
 print output
