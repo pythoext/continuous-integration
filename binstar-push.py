@@ -13,8 +13,8 @@ try:
 except IOError:
     BRANCH_TO_BUILD = "master"
 
-if BRANCH_TO_BUILD in BRANCH_TO_CHANNEL:
-    cmd.extend(['--channel=%s' % BRANCH_TO_CHANNEL[BRANCH_TO_BUILD]])
+if "master" not in BRANCH_TO_BUILD:
+    cmd.extend(['--channel=%s' % BRANCH_TO_CHANNEL.get(BRANCH_TO_BUILD, BRANCH_TO_BUILD)])
 
 cmd.extend(['--force'])
 cmd.extend(glob.glob('*.tar.bz2'))
