@@ -23,14 +23,15 @@ if 'master' not in BRANCH_TO_BUILD:
     os.environ.get("BINSTAR_TOKEN"), binstar_channel)
 
     # update meta.yaml requirements
-    if os.path.exists(os.path.join('..', 'conda-recipe', "%s.yaml" % binstar_channel)):
+    custom_meta_path = os.path.join('..', 'conda-recipe', "%s.yaml" % binstar_channel)
+    if os.path.exists(custom_meta_path):
         package_meta_path = os.path.join('..', 'conda-recipe', "meta.yaml")
+
         package_meta = yaml.load(open(package_meta_path, "rb"))
-        if binstar_channel in package_meta['requirements']:
-            for r in package_meta['requirements'][binstar_channel]:
-                package_meta['requirements']['run'].append(r)
-            # remove key
-            del(package_meta['requirements'][binstar_channel])
-            yaml.dump(package_meta, open(package_meta_path, "wb"), default_flow_style=False)
+        custom_meta = yaml.load(open(custom_meta_path, "rb"))
+
+        for r in custom_meta['requirements']['run']:
+            package_meta['requirements']['run'].append(r)
+        yaml.dump(package_meta, open(package_meta_path, "wb"), default_flow_style=False)
 
 print output
