@@ -29,6 +29,8 @@ if 'master' not in BRANCH_TO_BUILD:
         if binstar_channel in package_meta['requirements']:
             for r in package_meta['requirements'][binstar_channel]:
                 package_meta['requirements']['run'].append(r)
+            # remove key
+            del(package_meta['requirements'][binstar_channel])
             yaml.dump(package_meta, open(package_meta_path, "wb"), default_flow_style=False)
 
 print output
