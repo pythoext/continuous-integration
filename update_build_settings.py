@@ -19,7 +19,7 @@ output = "%s BRANCH_TO_BUILD=%s" % (cmd, BRANCH_TO_BUILD)
 if 'master' not in BRANCH_TO_BUILD:
     # add channel if needed
     binstar_channel = BRANCH_TO_CHANNEL.get(BRANCH_TO_BUILD, BRANCH_TO_BUILD)
-    output += " && conda config --add channels http://conda.binstar.org/t/%s/prometeia/channel/%s" % (
+    output += " && conda config --add channels https://conda.binstar.org/t/%s/prometeia/channel/%s" % (
     os.environ.get("BINSTAR_TOKEN"), binstar_channel)
 
     # update meta.yaml requirements
