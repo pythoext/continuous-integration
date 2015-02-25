@@ -6,6 +6,6 @@ bash $MINICONDA_FILE -b
 export PATH=$HOME/miniconda/bin:$PATH
 
 conda install --yes pip conda-build jinja2 binstar
-conda update --yes conda
+#conda update --yes conda
 conda config --add channels https://conda.binstar.org/prometeia
 conda config --add channels https://conda.binstar.org/t/$BINSTAR_TOKEN/prometeia
