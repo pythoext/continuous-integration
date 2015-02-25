@@ -34,4 +34,6 @@ if 'master' not in BRANCH_TO_BUILD:
             package_meta['requirements']['run'].append(r)
         yaml.dump(package_meta, open(package_meta_path, "wb"), default_flow_style=False)
 
+output += " && binstar config --set verify_ssl false"
+
 print output
