@@ -8,9 +8,9 @@ $MINICONDA_URL = "http://repo.continuum.io/miniconda/"
 function DownloadMiniconda ($python_version, $platform_suffix) {
     $webclient = New-Object System.Net.WebClient
     if ($python_version -match "3.4") {
-        $filename = "Miniconda3-3.5.5-Windows-" + $platform_suffix + ".exe"
+        $filename = "Miniconda3-latest-Windows-" + $platform_suffix + ".exe"
     } else {
-        $filename = "Miniconda-3.5.5-Windows-" + $platform_suffix + ".exe"
+        $filename = "Miniconda-latest-Windows-" + $platform_suffix + ".exe"
     }
     $url = $MINICONDA_URL + $filename
 
@@ -98,8 +98,8 @@ function main () {
     InstallMiniconda $env:PYTHON_VERSION $env:PYTHON_ARCH $env:PYTHON
     UpdateConda $env:PYTHON
     InstallCondaPackages $env:PYTHON "conda-build jinja2 pip binstar"
-    AddCondaChannels $env:PYTHON "https://conda.binstar.org/prometeia"
-    $prometeia_private = "https://conda.binstar.org/t/"+ $env:BINSTAR_TOKEN + "/prometeia"
+    AddCondaChannels $env:PYTHON "https://conda.anaconda.org/prometeia"
+    $prometeia_private = "https://conda.anaconda.org/t/"+ $env:BINSTAR_TOKEN + "/prometeia"
     AddCondaChannels $env:PYTHON $prometeia_private
 }
 
