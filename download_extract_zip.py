@@ -23,5 +23,10 @@ r = requests.get(url)
 f.write(r.content)
 f.close()
 
+print "Extract everythig from %s to %s" % (src_file_path, dest_dir)
+
 z = zipfile.ZipFile(src_file_path, "r", compression=zipfile.ZIP_STORED, allowZip64=True)
 z.extractall(dest_dir)
+
+print "OK"
+sys.exit(0)
