@@ -5,7 +5,7 @@ import requests
 
 # usage download_extract_zip path/to/extract/folder
 
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.getcwd()
 
 dest_dir = sys.argv[1]
 
