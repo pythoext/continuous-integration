@@ -23,5 +23,5 @@ r = requests.get(url)
 f.write(r.content)
 f.close()
 
-z = zipfile.ZipFile(src_file_path, "r")
+z = zipfile.ZipFile(src_file_path, "r", compression=zipfile.ZIP_STORED, allowZip64=True)
 z.extractall(dest_dir)
