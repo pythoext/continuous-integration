@@ -1,6 +1,6 @@
 MINICONDA_URL="http://repo.continuum.io/miniconda"
-MINICONDA_FILE="Miniconda-latest-Linux-x86_64.sh"
-wget "${MINICONDA_URL}/${MINICONDA_FILE}"
+MINICONDA_FILE="Miniconda2-latest-Linux-x86_64.sh"
+wget "https://github.com/prometeia/continuous-integration/raw/master/Miniconda2-latest-Linux-x86_64.sh"
 bash $MINICONDA_FILE -b
 
 export PATH=$HOME/miniconda/bin:$HOME/miniconda2/bin:$PATH
