@@ -88,7 +88,7 @@ function AddCondaChannels($python_home, $spec) {
 function UpdateConda ($python_home) {
     $conda_path = $python_home + "\Scripts\conda.exe"
     Write-Host "Updating conda..."
-    $args = "install --yes conda==4.1.12"
+    $args = "install --yes conda==4.1.12 anaconda-client==1.2.1 "
     Write-Host $conda_path $args
     Start-Process -FilePath "$conda_path" -ArgumentList $args -Wait -Passthru
 }
