@@ -1,6 +1,7 @@
 #!/bin/bash
 
-if ["$(SKIP_CI)" == "SKIP_CI"]; then
+if [ -n "${SKIP_CI}" ]
+then
     echo "skipping build";
     exit 0;
 fi
