@@ -1,13 +1,13 @@
 import os
 import sys
-from config import BRANCH_TO_CHANNEL, ALWAYS_BUILD_BRANCH
+from config import BRANCH_TO_CHANNEL
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 try:
     BRANCH_TO_BUILD = open(os.path.join(BASE_DIR, 'build_trigger_branch'), 'r').read().strip()
 except IOError:
-    BRANCH_TO_BUILD = os.environ.get('TRAVIS_BRANCH', 'master')
+    BRANCH_TO_BUILD = "master"
 
 try:
     BUILD_NUMBER = open(os.path.join(BASE_DIR, 'build_trigger_number'), 'r').read().strip()
@@ -20,9 +20,6 @@ else:
     cmd = "export"
 
 output = "%s BRANCH_TO_BUILD=%s && %s BUILD_NUMBER=%s" % (cmd, BRANCH_TO_BUILD, cmd, BUILD_NUMBER)
-
-if BRANCH_TO_BUILD not in ALWAYS_BUILD_BRANCH and 'trigger-ci' not in os.environ.get("TRAVIS_COMMIT_MESSAGE", ""):
-    output += " %s SKIP_CI=\"SKIP_CI\"" % cmd
 
 if 'master' not in BRANCH_TO_BUILD:
     # add channel if needed
