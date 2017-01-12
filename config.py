@@ -4,3 +4,9 @@ BRANCH_TO_CHANNEL = {
     'tg_dj_oo': 'new-ui',
     'tg_dj_oo_inspector': 'new-ui'
 }
+
+
+ALWAYS_BUILD_BRANCH = [
+    'pytho',
+    # 'test_ci'
+]
