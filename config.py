@@ -8,5 +8,7 @@ BRANCH_TO_CHANNEL = {
 
 ALWAYS_BUILD_BRANCH = [
     'pytho',
-    'pytho_dev_AandL3'
+    'pytho_dev_AandL3',
+    'bper',
+    'bpop'
 ]
