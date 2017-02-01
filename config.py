@@ -10,5 +10,6 @@ ALWAYS_BUILD_BRANCH = [
     'pytho',
     'pytho_dev_AandL3',
     'bper',
-    'bpop'
+    'bpop',
+    'alexbank'
 ]
