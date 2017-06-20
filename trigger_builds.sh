@@ -1,10 +1,10 @@
 #!/bin/bash
-#Non funziona
-#if [ -n "${SKIP_CI}" ]
-#then
-#    echo "skipping build";
-#    exit 0;
-#fi
+
+if [ -n "${SKIP_CI}" ]
+then
+    echo "skipping build";
+    exit 0;
+fi
 mkdir $1
 cd $1
 git init
