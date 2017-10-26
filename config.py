@@ -12,5 +12,6 @@ ALWAYS_BUILD_BRANCH = [
     'bper',
     'bpop',
     'alexbank',
+    'halkbank',
     'pytho_dev_charts'
 ]
