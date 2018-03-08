@@ -1,0 +1,14 @@
+FROM continuumio/miniconda:4.3.27
+
+RUN conda update -n base conda; \
+    conda install anaconda-client conda-build; \
+    touch .condarc;
+
+ENV REPO=/pythomainrepo
+ENV DISTRO=pytho_dev
+ENV TOKEN=xx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+ENV APPLICATIONS="ratingpro pytho"
+
+COPY ./entrypoint.sh /
+ENTRYPOINT [ "/bin/bash", "/entrypoint.sh" ]
+CMD ["BOOTSTRAP"]

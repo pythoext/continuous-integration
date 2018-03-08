@@ -1,0 +1,12 @@
+version: '3'
+services:
+  linuxbuilder:
+    build: linuxbuilder
+    volumes:
+      - ../:/conder/
+      - C:\tmp\pythoofflinerepo/:/pythomainrepo/
+    environment:
+      - REPO=/pythomainrepo
+      - DISTRO=pytho_dev
+      - TOKEN=xx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      - APPLICATIONS="ratingpro"

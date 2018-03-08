@@ -9,9 +9,8 @@ import shutil
 class Repacker(object):
     """A coda offline repacker"""
 
-    def __init__(self, mainrepo, envinfofile="envinfo.json", skipfirstfolder=True):
+    def __init__(self, mainrepo, envinfofile="envinfo.json"):
         self.mainrepo = mainrepo
-        self.skipfirstfolder = bool(skipfirstfolder)
         with open(envinfofile) as envfile:
             self.envinfo = json.load(envfile)
 
@@ -25,8 +24,7 @@ class Repacker(object):
 
     @property
     def pkgs_dirs(self):
-        return [os.path.abspath(d) for d in self.envinfo['pkgs_dirs']][int(self.skipfirstfolder):]
-        
+        return [os.path.abspath(d) for d in self.envinfo['pkgs_dirs']]
 
     @property
     def target(self):
