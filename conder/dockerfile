@@ -10,5 +10,7 @@ ENV TOKEN=xx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ENV APPLICATIONS="ratingpro pytho"
 
 COPY ./entrypoint.sh /
+COPY ./update-offline-repo.sh /conder/
+COPY ./repackenv.py /conder/
 ENTRYPOINT [ "/bin/bash", "/entrypoint.sh" ]
 CMD ["BOOTSTRAP"]

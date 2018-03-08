@@ -1,9 +1,8 @@
 version: '3'
 services:
   linuxbuilder:
-    build: linuxbuilder
+    build: ../
     volumes:
-      - ../:/conder/
       - C:\tmp\pythoofflinerepo/:/pythomainrepo/
     environment:
       - REPO=/pythomainrepo

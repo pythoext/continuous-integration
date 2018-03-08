@@ -34,8 +34,12 @@ echo Fatto, rimozione ambiente $distro
 source activate base
 conda env remove -y -n $distro
 
-echo "Indici nell'offline channel $distro:"
-ls $target/repodata.*  $target/../noarch/repodata.*
+if [ -z "$DONTINDEX" ]; then
+    echo "Indici nell'offline channel $distro:"
+    ls $target/repodata.*  $target/../noarch/repodata.*
+else
+    echo "WARNING: Indicizzazione di $target e $target/../noarch saltata, provvedere esternamente."
+fi
 echo Pacchetti rilasciati: $(ls $target | grep '.tar.bz2' | wc -l)
 
 echo --- Done! ---

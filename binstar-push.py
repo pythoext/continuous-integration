@@ -21,9 +21,9 @@ else:
         target_channel = None
 
 if target_channel is not None:
-    cmd.extend(['--channel=%s' % target_channel ])
+    cmd.append('--channel=%s' % target_channel)
 
-cmd.extend(['--force'])
+cmd.append('--force')
 cmd.extend(glob.glob('*.tar.bz2'))
 
 try:
@@ -31,3 +31,15 @@ try:
 except subprocess.CalledProcessError:
     traceback.print_exc()
 
+buildnum = os.environ.get('BUILD_NUMBER')
+print "Build number: ", buildnum
+
+if target_channel and buildnum:
+    ver_channel = '_'.join([target_channel] + [n.zfill(2) for n in buildnum.split('.')[:2]])
+    print "Copying label %s into %s" % (target_channel, ver_channel)
+    anacmd = ['anaconda', '-t', token, 'label', '--copy', target_channel, ver_channel]
+    try:
+        subprocess.check_call(anacmd)
+    except subprocess.CalledProcessError:
+        print anacmd
+        traceback.print_exc()

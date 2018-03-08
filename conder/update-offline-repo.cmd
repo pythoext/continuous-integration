@@ -26,14 +26,13 @@ python repackenv.py %mainrepo%
 
 echo Reindicizzazione
 SET /p target=<tgfolder.txt
-call conda index %target%
-call conda index %target%\..\noarch
+for /D %%d IN (%target%\..\*) DO call conda index %%d
 
 echo Fatto, rimozione ambiente %distro%
 call activate base
 call conda env remove -y -n %distro%
 
 echo Indici nell'offline channel %distro%:
-dir %target%\repodata.*  %target%\..\noarch\repodata.*
+dir %target%\..\*\repodata.*
 
 echo --- Done! ---
