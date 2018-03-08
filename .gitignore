@@ -54,3 +54,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+### Conder tmp data
+conder/tgfolder.txt
+conder/envinfo.json
