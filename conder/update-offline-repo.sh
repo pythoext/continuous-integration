@@ -6,9 +6,9 @@ export distro=$1
 export distrotoken=$2
 export mainrepo=$3
 
-echo Aggiornamento e pulizia ambiente Conda base
-source activate base
-conda update -y -n base conda
+echo Aggiornamento e pulizia ambiente Conda root
+source activate root
+conda update -y -n root conda
 conda clean --all -y
 
 echo Creazione ambiente Conda $distro, puntato alla label $distro
@@ -25,21 +25,26 @@ echo Trasferimento dalla cache ai pacchetti
 conda info --json | tee envinfo.json
 python repackenv.py $mainrepo
 
-echo Reindicizzazione
-export target=$(cat tgfolder.txt)
-conda index $target
-conda index $target/../noarch
+source activate root
 
-echo Fatto, rimozione ambiente $distro
-source activate base
-conda env remove -y -n $distro
+if [ -z "$DONTREMOVE" ]; then
+    echo Fatto, rimozione ambiente $distro
+    conda env remove -y -n $distro
+else
+    echo "INFO: Rimozione dell'ambiente $distro saltata, provvedere esternamente."
+fi
 
 if [ -z "$DONTINDEX" ]; then
+    echo Reindicizzazione
+    export target=$(cat tgfolder.txt)
+    conda index $target
+    conda index $target/../noarch
     echo "Indici nell'offline channel $distro:"
     ls $target/repodata.*  $target/../noarch/repodata.*
 else
-    echo "WARNING: Indicizzazione di $target e $target/../noarch saltata, provvedere esternamente."
+    echo "INFO: Indicizzazione di $target e $target/../noarch saltata, provvedere esternamente."
 fi
-echo Pacchetti rilasciati: $(ls $target | grep '.tar.bz2' | wc -l)
+
+echo Pacchetti nel target: $(ls $target | grep '.tar.bz2' | wc -l)
 
 echo --- Done! ---

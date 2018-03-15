@@ -32,7 +32,7 @@ Come esempio, prendiamo la label [halkbank](https://anaconda.org/prometeia/repo/
 
     echo Creazione ambiente Conda di riferimento, puntato alla label voluta
     conda create -y -n %distro%
-    conda activate %distro%
+    activate %distro%
     conda config --env --add channels http://conda.anaconda.org/prometeia
     conda config --env --add channels https://conda.anaconda.org/t/%distrotoken%/prometeia
     conda config --env --add channels https://conda.anaconda.org/t/%distrotoken%/prometeia/channel/%distro%
@@ -75,7 +75,7 @@ Nella macchina target, dopo aver installato MiniConda, andrà copiata l'intera f
     
 A questo punto ogni installazione da tale ambiente Conda opererà direttamente e unicamente da quanto nel custom channel. Ad esempio, per l'installazione di _PYTHO_ e _RatingPro_:
 
-    conda activate %ambiente%
+    activate %ambiente%
     conda install pytho ratingpro
 
 Per gli aggiornamenti, sarà sufficiente riallineare il contenuto del repository locale del custom channel con quanto nella relativa folder sul master centrale, ad esempio via _rsync_ o _robocopy_; dopodiché, nell'effettivo ambiente conda basterà la solita _conda update_.

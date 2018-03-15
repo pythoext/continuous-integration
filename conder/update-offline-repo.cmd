@@ -6,13 +6,15 @@ SHIFT
 SET mainrepo=%1
 SHIFT
 
-echo Aggiornamento ambiente Conda base
-call conda activate base
-call conda update -y -n base conda
+echo Aggiornamento ambiente Conda root
+call activate root
+call conda update -y -n root conda
+call conda install -y conda-build
 
 echo Creazione ambiente Conda %distro%, puntato alla label %distro%
 call conda create -y -n %distro%
-call conda activate %distro%
+call activate %distro%
+call conda info
 call conda config --env --add channels http://conda.anaconda.org/prometeia
 call conda config --env --add channels https://conda.anaconda.org/t/%distrotoken%/prometeia
 call conda config --env --add channels https://conda.anaconda.org/t/%distrotoken%/prometeia/channel/%distro%
@@ -24,15 +26,15 @@ echo Trasferimento dalla cache ai pacchetti
 call conda info --json > envinfo.json
 python repackenv.py %mainrepo%
 
+echo Fatto, rimozione ambiente %distro%
+call conda activate root
+call conda env remove -y -n %distro%
+
 echo Reindicizzazione
 SET /p target=<tgfolder.txt
 for /D %%d IN (%target%\..\*) DO call conda index %%d
 
-echo Fatto, rimozione ambiente %distro%
-call conda activate base
-call conda env remove -y -n %distro%
-
-echo Indici nell'offline channel %distro%:
+echo Indici nell'offline channel %distro% (%target%\..):
 dir %target%\..\*\repodata.*
 
 echo --- Done! ---
