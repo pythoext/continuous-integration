@@ -32,7 +32,7 @@ Come esempio, prendiamo la label [halkbank](https://anaconda.org/prometeia/repo/
 
     echo Creazione ambiente Conda di riferimento, puntato alla label voluta
     conda create -y -n %distro%
-    activate %distro%
+    conda activate %distro%
     conda config --env --add channels http://conda.anaconda.org/prometeia
     conda config --env --add channels https://conda.anaconda.org/t/%distrotoken%/prometeia
     conda config --env --add channels https://conda.anaconda.org/t/%distrotoken%/prometeia/channel/%distro%

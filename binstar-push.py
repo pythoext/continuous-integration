@@ -54,7 +54,11 @@ if target_channel and len(uploadus) == 1:
     if not ok:
         execcmd("Upgrading anaconda-client to use the new api", ['conda', 'update', '-y', 'anaconda-client'], 3)
     # Naming del tipo: "gsf-4.1.2-np110py27_2025.tar.bz2"
-    versione = uploadus.pop().split('-')[1]
+    packname = uploadus.pop()
+    versione = packname.split('-')[-2]
+    prodotto = '.'.join(packname.split('-')[:-2])
+    logging.info("Calculating versiong label from label %s for product %s version %s", 
+                 target_channel, prodotto, versione)
     major, minor, patch = versione.split('.')
     ver_channel = '%s_%s_%s' % (target_channel, major.zfill(2), minor.zfill(2))
     execcmd("Copying label %s into %s" % (target_channel, ver_channel),

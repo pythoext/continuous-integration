@@ -1,7 +1,7 @@
 FROM continuumio/miniconda:4.3.27
 
 RUN conda update -n base conda; \
-    conda install anaconda-client conda-build; \
+    conda install -y anaconda-client conda-build; \
     touch .condarc;
 
 ENV REPO=/pythomainrepo

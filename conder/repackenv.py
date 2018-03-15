@@ -57,7 +57,10 @@ class Repacker(object):
         logging.info("Syncing %s", self.target)
         required = {}
         for packdir in self.pkgs_dirs:
-            required.update(self.list_pkgs(packdir))
+            logging.info("Searching packages in %s", packdir)
+            found = self.list_pkgs(packdir)
+            logging.debug("Found packages: %s", ', '.join(sorted(found)))
+            required.update(found)
         existing = self.list_pkgs(self.target)
         obsolete = set(existing) - set(required)
         if obsolete and clean:
@@ -82,13 +85,14 @@ class Repacker(object):
 
 def main():
     """Main"""
-    logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s', level=logging.INFO)
     parser = argparse.ArgumentParser(description='Offline Anaconda repacker')
     parser.add_argument('mainrepopath', help='Path to main offline distro repository')
     parser.add_argument('-f', '--force', help='Overwrite existing packages', action='store_true', default=False)
     parser.add_argument('-nc', '--noclean', help='Do not remove obsolete packages', action='store_true', default=False)
     parser.add_argument('-o', '--outfile', help='Output file with target folder', default='tgfolder.txt')
+    parser.add_argument('--loglevel', default=logging.INFO, type=int)
     args = parser.parse_args()
+    logging.basicConfig(format='%(asctime)-15s - %(levelname)s - %(message)s', level=args.loglevel)
     repa = Repacker(args.mainrepopath)
     repa.bootstrap()
     repa.sync(force=args.force, clean=not args.noclean)
