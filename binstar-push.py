@@ -3,18 +3,25 @@ import sys
 import glob
 import subprocess
 import traceback
+import logging
 from config import BRANCH_TO_CHANNEL
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s",
+    datefmt="%H:%M:%S",
+    stream=sys.stderr)
+
 def execcmd(message, cmdlist, exitcode=None):
-    print message
+    logging.info(message)
     try:
         subprocess.check_call(cmdlist)
-        print "Done!"
+        logging.debug('Done!')
         return True
     except subprocess.CalledProcessError:
-        print cmd
-        traceback.print_exc()
+        logging.warning("Failed '%s' because of: %s", ' '.join(cmdlist), traceback.format_exc())
         if exitcode is not None:
+            logging.error("Exiting with %d", exitcode)
             sys.exit(exitcode)
         return False
 
@@ -43,9 +50,9 @@ execcmd("Uploading on Anaconda channel %s of packages %s" % (target_channel, ', 
 
 ## Aggiunta per produrre la label mobile basata sulla verisone
 if target_channel and len(uploadus) == 1:
-    ok = execcmd("Installing anaconda-client", ['conda', 'install', 'anaconda-client'])
+    ok = execcmd("Installing anaconda-client", ['conda', 'install', '-y', 'anaconda-client'])
     if not ok:
-        execcmd("Upgrading anaconda-client to use the new api", ['conda', 'update', 'anaconda-client'], 3)
+        execcmd("Upgrading anaconda-client to use the new api", ['conda', 'update', '-y', 'anaconda-client'], 3)
     # Naming del tipo: "gsf-4.1.2-np110py27_2025.tar.bz2"
     versione = uploadus.pop().split('-')[1]
     major, minor, patch = versione.split('.')
