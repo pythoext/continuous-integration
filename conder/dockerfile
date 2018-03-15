@@ -1,6 +1,6 @@
 FROM continuumio/miniconda:4.3.27
 
-RUN conda update -n base conda; \
+RUN conda update conda; \
     conda install -y anaconda-client conda-build; \
     touch .condarc;
 

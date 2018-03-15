@@ -58,6 +58,7 @@ target/
 ### Conder tmp data
 conder/tgfolder.txt
 conder/envinfo.json
+conder/*.tmp
 
 # Docker-compose local override
 docker-compose.override.yml
