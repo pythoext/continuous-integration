@@ -15,7 +15,8 @@ pipeline {
     }
   }
   environment {
-    OFFLINE_CONDA_REPO = 'X:\\pytho-offline-repo'
+    SHARED_CONDA_REPO = 'X:\\pytho-offline-repo'
+    OFFLINE_CONDA_REPO = 'C:\\pytho-offline-repo'
     CONDAROOT = 'C:\\Users\\brandolinid\\AppData\\Local\\Continuum\\miniconda2'
   }
 }
