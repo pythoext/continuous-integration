@@ -1,3 +1,4 @@
+@ECHO OFF
 IF [%CONDAROOT%] == [] GOTO usage
 IF [%OFFLINE_CONDA_REPO%] == [] GOTO usage
 IF [%SHARED_CONDA_REPO%] == [] GOTO usage

@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# echo check if changed before building
+filechanged=$(git show -q $2 | wc -l)
+if [ $2 -eq 0]; then
+    SKIP_CI="SKIUS"
+    echo "In $2 changed $filechanged files, requesting a skip"
+else
+    echo "In $2 changed $filechanged files, triggering $1"
+fi
+
 if [ -n "${SKIP_CI}" ]
 then
     echo "skipping build";

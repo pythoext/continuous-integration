@@ -35,6 +35,6 @@ SET /p target=<tgfolder.txt
 for /D %%d IN (%target%\..\*) DO call conda index %%d
 
 echo Indici nell'offline channel %distro% (%target%\..):
-dir %target%\..\*\repodata.*
+tree %target%\..  /F /A | | findstr /V tar.bz2
 
 echo --- Done! ---
