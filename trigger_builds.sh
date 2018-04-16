@@ -1,25 +1,28 @@
 #!/bin/bash
 
+project=$1
+shift
+
 # echo check if changed before building
-filechanged=$(git show -q $2 | wc -l)
+filechanged=$(git show -q $* | wc -l)
 if [ "$filechanged" -eq 0 ]; then
-    SKIP_CI="SKIUS"
-    echo "In $2 changed $filechanged files, requesting a skip"
+    SKIP_CI="No changes"
+    echo "In $* changed $filechanged files, requesting a skip for ${project}"
 else
-    echo "In $2 changed $filechanged files, triggering $1"
+    echo "In $* changed $filechanged files, possible triggering of ${project}"
 fi
 
 if [ -n "${SKIP_CI}" ]
 then
-    echo "skipping build";
+    echo "skipping build cause ${SKIP_CI}";
     exit 0;
 fi
-mkdir $1
-cd $1
+mkdir ${project}
+cd ${project}
 git init
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
-git remote add origin https://github.com/prometeia/$1.git
+git remote add origin https://github.com/prometeia/${project}.git
 git pull origin master
 git checkout master
 touch build_trigger_number
