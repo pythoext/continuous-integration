@@ -4,6 +4,7 @@ project=$1
 shift
 
 # echo check if changed before building
+echo "Checking changes  in $*"
 filechanged=$(git show -q $* | wc -l)
 if [ "$filechanged" -eq 0 ]; then
     SKIP_CI="No changes"

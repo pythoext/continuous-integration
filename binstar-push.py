@@ -56,8 +56,10 @@ if target_channel and len(uploadus) == 1:
     # Naming del tipo: "gsf-4.1.2-np110py27_2025.tar.bz2"
     packname = uploadus.pop()
     versione = packname.split('-')[-2]
+    while versione.count('.') < 2:
+        versione += '.0'
     prodotto = '.'.join(packname.split('-')[:-2])
-    logging.info("Calculating versiong label from label %s for product %s version %s", 
+    logging.info("Calculating versiong label from label %s for product: %s v. %s", 
                  target_channel, prodotto, versione)
     major, minor, patch = versione.split('.')
     ver_channel = '%s_%s_%s' % (target_channel, major.zfill(2), minor.zfill(2))
