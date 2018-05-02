@@ -96,7 +96,7 @@ function UpdateConda ($python_home) {
 
 function main () {
     InstallMiniconda $env:PYTHON_VERSION $env:PYTHON_ARCH $env:PYTHON
-    InstallCondaPackages $env:PYTHON "conda-build==1.16 jinja2 pip anaconda-client"
+    InstallCondaPackages $env:PYTHON "conda-build==1.16 jinja2 pip anaconda-client Cython==0.24 numpy==1.10.4"
     UpdateConda $env:PYTHON
     AddCondaChannels $env:PYTHON "https://conda.anaconda.org/prometeia"
     $prometeia_private = "https://conda.anaconda.org/t/"+ $env:BINSTAR_TOKEN + "/prometeia"
