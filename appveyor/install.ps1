@@ -102,7 +102,7 @@ function main () {
     AddCondaChannels $env:PYTHON "https://conda.anaconda.org/prometeia"
     $prometeia_private = "https://conda.anaconda.org/t/"+ $env:BINSTAR_TOKEN + "/prometeia"
     AddCondaChannels $env:PYTHON $prometeia_private
-    InstallCondaPackages $env:PYTHON "promebuilder<2 Cython==0.28.*"
+    InstallCondaPackages $env:PYTHON 'promebuilder' 'Cython==0.28.*'
 }
 
 main

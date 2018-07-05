@@ -11,4 +11,4 @@ conda install --yes conda-build pip jinja2==2.8 anaconda-client Cython==0.24 num
 conda update --yes conda-build
 conda config --add channels https://conda.anaconda.org/prometeia
 conda config --add channels https://conda.anaconda.org/t/$BINSTAR_TOKEN/prometeia
-conda install --yes promebuilder<2 Cython==0.28.*
+conda install --yes 'promebuilder' 'Cython==0.28.*'
