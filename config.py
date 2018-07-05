@@ -10,6 +10,6 @@ ALWAYS_BUILD_BRANCH = [
     'bpop',
     'alexbank',
     'halkbank',
-    'develop'
+    'develop',
     'develop_refactor'
 ]

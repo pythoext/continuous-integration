@@ -10,7 +10,7 @@ else:
     cmd = "export"
 
 if BRANCH_TO_BUILD not in ALWAYS_BUILD_BRANCH and 'trigger-ci' not in os.environ.get("TRAVIS_COMMIT_MESSAGE", ""):
-    output = " %s SKIP_CI=\"SKIP_CI\"" % cmd
+    output = " %s SKIP_CI=\"Skip CI branch %s\"" % (cmd, BRANCH_TO_BUILD)
 else:
     output = ""
 

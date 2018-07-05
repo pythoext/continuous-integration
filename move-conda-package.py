@@ -9,6 +9,7 @@ from conda_build.config import Config
 #    from conda_build import config
 config = Config()
 
+print "Searching builded package in", config.bldpkgs_dir
 binary_package_glob = os.path.join(config.bldpkgs_dir, '*.tar.bz2')
 binary_package = sorted(glob.glob(binary_package_glob))[-1]
 
