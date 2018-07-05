@@ -94,13 +94,23 @@ function UpdateConda ($python_home) {
 }
 
 
+function ConfigConda ($python_home) {
+    $conda_path = $python_home + "\Scripts\conda.exe"
+    Write-Host "Updating conda..."
+    $args = "conda config --set channel_priority false"
+    Write-Host $conda_path $args
+    Start-Process -FilePath "$conda_path" -ArgumentList $args -Wait -Passthru
+}
+
 function main () {
     InstallMiniconda $env:PYTHON_VERSION $env:PYTHON_ARCH $env:PYTHON
     # # python==2.7.14 
     InstallCondaPackages $env:PYTHON "conda-build pip jinja2==2.8 anaconda-client Cython==0.24 numpy==1.10.4"
     UpdateConda $env:PYTHON
+    ConfigConda $env:PYTHON
     AddCondaChannels $env:PYTHON "https://conda.anaconda.org/prometeia"
     $prometeia_private = "https://conda.anaconda.org/t/"+ $env:BINSTAR_TOKEN + "/prometeia"
+    AddCondaChannels $env:PYTHON $prometeia_private/channel/pytho
     AddCondaChannels $env:PYTHON $prometeia_private
     InstallCondaPackages $env:PYTHON 'promebuilder' 'Cython==0.28.*'
 }
