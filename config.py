@@ -1,5 +1,5 @@
 BRANCH_TO_CHANNEL = {
-    'develop_refactor': 'develop'
+    'develop_refactor': 'refactor'
 }
 
 

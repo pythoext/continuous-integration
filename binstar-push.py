@@ -49,7 +49,8 @@ cmd.extend(['--force'] + uploadus)
 execcmd("Uploading on Anaconda channel %s of packages %s" % (target_channel, ', '.join(uploadus)), cmd, 1)
 
 ## Aggiunta per produrre la label mobile basata sulla verisone
-if target_channel and len(uploadus) == 1:
+VESIONLABEL = False # Disabilitato, abbiamo preso altra via
+if VESIONLABEL and target_channel and len(uploadus) == 1:
     ok = execcmd("Installing anaconda-client", ['conda', 'install', '-y', 'anaconda-client'])
     if not ok:
         execcmd("Upgrading anaconda-client to use the new api", ['conda', 'update', '-y', 'anaconda-client'], 3)
